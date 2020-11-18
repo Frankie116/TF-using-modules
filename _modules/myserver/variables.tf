@@ -19,17 +19,15 @@ variable "my-ami-image" {
     default = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
 }
 
+variable "my-ami-owners" {
+    default = "099720109477"
+}
 
+variable my-project-name{
+  description = "Name of the project. Used in resource names and tags."
+  type        = string
+  default     = "default"
+}
+# owners      = ["amazon"]
+# values = ["amzn2-ami-hvm-*-x86_64-gp2"]
 
-
-# variable "private_ip" {
-#     default = "99.99.99.99"
-# }
-
-# variable "subnet_id" {
-#     default = "9.9.9.9/9"
-# }
-
-# variable "network_interface_id" {
-#     default = "9999888777"
-# }

@@ -22,6 +22,11 @@ output "this_server_private_ip" {
 }
 
 
+# output "this_ami_image" {
+#   description = "The ami on this server"
+#   value       = module.my-new-server.this_ami_image
+# }
+
 # output "this_eip_public_ip" {
 #   value       = module.my-new-eip.this_eip_public_ip
 # }

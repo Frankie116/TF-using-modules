@@ -111,30 +111,39 @@ resource "aws_instance" "my-server" {
 
   user_data = <<-EOF
               #!/bin/bash
-              sudo apt update -y
+
+              sudo apt update -y           
               sudo apt install apache2 -y
-              sudo systemctl start apache2
-              sudo bash -c 'echo your very first web server > /var/www/html/index.html'
-              sudo apt-get update
               sudo apt-get install default-jre
               sudo apt-get install default-jdk
+
+              
+              sudo yum update -y
+              sudo yum install httpd -y
+              sudo yum install default-jre
+              sudo yum install default-jdk
+
+
+              sudo systemctl enable httpd
+              sudo systemctl start httpd
+              sudo systemctl start apache2
               java -version
+              echo "<html><body><div>Welcome to the Jenkins Server.  Hostname :$(hostname -f) </div></body></html>" > /var/www/html/index.html
               EOF
   tags          = {
     Name        = var.my-tag-name
+    Project     = var.my-project-name
   }
 }
-
+# sudo bash -c 'echo Welcome to the Ubuntu Server.  Hostname :$(hostname -f) > /var/www/html/index.html'
 
 data "aws_ami" "my-ami" {
   most_recent = true
-  # owners      = ["amazon"]
-  owners = ["099720109477"]
+  owners = [var.my-ami-owners]
 
   filter {
     name   = "name"
-    # values = ["amzn2-ami-hvm-*-x86_64-gp2"]
-    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
+    values = var.my-ami-image
   }
 }
 

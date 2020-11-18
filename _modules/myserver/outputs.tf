@@ -40,6 +40,10 @@ output "this_eip_dns" {
   value       = aws_eip.my-eip.public_dns
 }
 
+# output "this_ami_image" {
+#   description = "The ami on this server"
+#   value       = aws_ami.my-ami.id
+# }
 
 
 # output "this_tag_name" {
