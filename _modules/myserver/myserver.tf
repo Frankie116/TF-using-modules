@@ -67,6 +67,13 @@ resource "aws_security_group" "my-security-group" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    description = "Jenkins"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   egress {
     from_port   = 0
     to_port     = 0
@@ -114,10 +121,14 @@ resource "aws_instance" "my-server" {
 
               sudo apt update -y           
               sudo apt install apache2 -y
-              sudo apt-get install default-jre
+              sudo apt-get install default-jre -y
               sudo apt-get install default-jdk
+              wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+              echo 'deb https://pkg.jenkins.io/debian-stable binary/' | sudo tee -a /etc/apt/sources.list
+              sudo apt-get update -y
+              sudo apt-get -y install jenkins
 
-              
+
               sudo yum update -y
               sudo yum install httpd -y
               sudo yum install default-jre
@@ -127,6 +138,9 @@ resource "aws_instance" "my-server" {
               sudo systemctl enable httpd
               sudo systemctl start httpd
               sudo systemctl start apache2
+              sudo systemctl start jenkins
+              
+              sudo systemctl status jenkins
               java -version
               echo "<html><body><div>Welcome to the Jenkins Server.  Hostname :$(hostname -f) </div></body></html>" > /var/www/html/index.html
               EOF
