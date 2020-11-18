@@ -8,15 +8,25 @@
 # -------------------
 
 [01] Create terraform modules to enable the following AWS resources to be built:
+
     - EC2 Instance
+
     - Network Interface
+
     - Elastic IP
+
     - AMI - Ubuntu or Amazon Linux 2
+
     - VPC
+
     - Internet Gateway
+
     - Route Table
+
     - Route Table Association
+
     - Subnet
+    
     - Security Group (allow http, https & ssh)
 
 [02] Execute a Terraform run to build the above resources with Java & Apache installed on the EC2
