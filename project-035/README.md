@@ -7,17 +7,17 @@
 ## Part 1 Objectives
 # -------------------
 
-[01] Create terraform modules to enable the following AWS resources to be built:
+[01] Create terraform modules to enable the following AWS resources to be built on a terraform run: [Done]
 
-    - EC2 Instance
+    - EC2 Instance 
 
-    - Network Interface
+    - Network Interface 
 
-    - Elastic IP
+    - Elastic IP 
 
-    - AMI - Ubuntu or Amazon Linux 2
+    - AMI - Ubuntu or Amazon Linux 2 
 
-    - VPC
+    - VPC 
 
     - Internet Gateway
 
@@ -26,10 +26,10 @@
     - Route Table Association
 
     - Subnet
-    
+
     - Security Group (allow http, https & ssh)
 
-[02] Execute a Terraform run to build the above resources with Java & Apache installed on the EC2
+[02] Execute a Terraform run to build the above resources with Java & Apache installed on the EC2 [Done]
 
 
 
@@ -37,7 +37,7 @@
 ## Part 2 Objectives
 # -------------------
 
-[03] Auto install Jenkins on the server
+[03] Auto install Jenkins on the server [Done]
 
 [04] Save a Snapshot of the Jenkins server
 
