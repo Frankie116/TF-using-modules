@@ -1,15 +1,11 @@
 # Input variable definitions
 
 variable "region" {
-    default = "eu-west-2"
+    default = "eu-west-1"
 }
 
-variable "az1" {
+variable "my-az" {
     default = "eu-west-1a"
-}
-
-variable "az2" {
-    default = "eu-west-1b"
 }
 
 variable "my-ami-image" {
@@ -26,4 +22,8 @@ variable "my-project-name" {
   description = "Name of the project. Used in resource names and tags."
   type        = string
   default     = "default"
+}
+
+variable "my-keypair" {
+    default = "my-london-key"
 }

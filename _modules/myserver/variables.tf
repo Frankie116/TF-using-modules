@@ -1,19 +1,17 @@
-variable instance_type {
+variable "region" {
+    default = "eu-west-1"
+}
+variable "my-az" {
+    default = "eu-west-1a"
+}
+
+variable "my-instance-type" {
    default = "t2.micro"
 }
 
 variable "my-tag-name" {
     default = "my-default-name"
 }
-
-variable "az1" {
-    default = "eu-west-1a"
-}
-
-variable "az2" {
-    default = "eu-west-1b"
-}
-
 
 variable "my-ami-image" {
     default = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
@@ -28,6 +26,12 @@ variable my-project-name{
   type        = string
   default     = "default"
 }
+
+variable "my-keypair" {
+    default = "my-london-key"
+}
+
+
 # owners      = ["amazon"]
 # values = ["amzn2-ami-hvm-*-x86_64-gp2"]
 

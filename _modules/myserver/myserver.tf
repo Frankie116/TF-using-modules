@@ -33,7 +33,7 @@ resource "aws_route_table_association" "my-rt-association" {
 resource "aws_subnet" "my-subnet" {
   vpc_id            = aws_vpc.my-vpc.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = var.az1
+  availability_zone = var.my-az
   tags = {
     Name = "My-Subnet-034"
   }
@@ -107,9 +107,9 @@ resource "aws_eip" "my-eip" {
 
 resource "aws_instance" "my-server" {
   ami           = data.aws_ami.my-ami.id
-  instance_type = var.instance_type
-  availability_zone = var.az1
-  key_name = "MyIrishKey"
+  instance_type = var.my-instance-type
+  availability_zone = var.my-az
+  key_name = var.my-keypair
 
   network_interface {
     device_index         = 0
@@ -127,6 +127,7 @@ resource "aws_instance" "my-server" {
               echo 'deb https://pkg.jenkins.io/debian-stable binary/' | sudo tee -a /etc/apt/sources.list
               sudo apt-get update -y
               sudo apt-get -y install jenkins
+              sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 
               sudo yum update -y
@@ -139,7 +140,7 @@ resource "aws_instance" "my-server" {
               sudo systemctl start httpd
               sudo systemctl start apache2
               sudo systemctl start jenkins
-              
+
               sudo systemctl status jenkins
               java -version
               echo "<html><body><div>Welcome to the Jenkins Server.  Hostname :$(hostname -f) </div></body></html>" > /var/www/html/index.html
@@ -149,7 +150,7 @@ resource "aws_instance" "my-server" {
     Project     = var.my-project-name
   }
 }
-# sudo bash -c 'echo Welcome to the Ubuntu Server.  Hostname :$(hostname -f) > /var/www/html/index.html'
+
 
 data "aws_ami" "my-ami" {
   most_recent = true
