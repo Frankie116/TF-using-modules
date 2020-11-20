@@ -21,7 +21,7 @@ variable "my-ami-owners" {
     default = "099720109477"
 }
 
-variable my-project-name{
+variable "my-project-name"{
   description = "Name of the project. Used in resource names and tags."
   type        = string
   default     = "default"
@@ -31,7 +31,6 @@ variable "my-keypair" {
     default = "my-london-key"
 }
 
-
-# owners      = ["amazon"]
-# values = ["amzn2-ami-hvm-*-x86_64-gp2"]
-
+variable "my-existing-eip" {
+    default = "my-default-eip"
+}

@@ -25,5 +25,8 @@ variable "my-project-name" {
 }
 
 variable "my-keypair" {
-    default = "my-london-key"
+}
+
+variable "my-existing-eip" {
+    default = "my-default-eip"
 }

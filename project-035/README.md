@@ -43,7 +43,7 @@
 
 [05] Enable a newly built server to use a snapshot with Jenkins, java & apache installed
 
-[06] Enable the same EIP to persist even after a Terraform destroy & re-apply
+[06] Enable the same EIP to persist even after a Terraform destroy & re-apply [Done]
 
 [07] Use Route53 to register Jenkins server dns name
 

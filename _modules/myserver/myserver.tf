@@ -67,13 +67,13 @@ resource "aws_security_group" "my-security-group" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress {
-    description = "Jenkins"
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  # ingress {
+  #   description = "Jenkins"
+  #   from_port   = 8080
+  #   to_port     = 8080
+  #   protocol    = "tcp"
+  #   cidr_blocks = ["0.0.0.0/0"]
+  # }
   egress {
     from_port   = 0
     to_port     = 0
@@ -96,12 +96,16 @@ resource "aws_network_interface" "my-server-nic" {
   }
 }
 
+data "aws_eip" "my-eip" {
+  filter {
+    name   = "tag:Name"
+    values = [var.my-existing-eip]
+  }
+}
 
-resource "aws_eip" "my-eip" {
-  vpc                       = true
-  network_interface         = aws_network_interface.my-server-nic.id
-  associate_with_private_ip = "10.0.1.50"
-  depends_on                = [aws_internet_gateway.my-gw]
+resource "aws_eip_association" "eip_assoc" {
+  instance_id   = aws_instance.my-server.id
+  allocation_id = data.aws_eip.my-eip.id
 }
 
 
@@ -163,7 +167,16 @@ data "aws_ami" "my-ami" {
 }
 
 
-
+# resource "aws_route53_zone" "primary" {
+#   name = "intracom.uk"
+# }
+# resource "aws_route53_record" "jenkins1" {
+#   zone_id = aws_route53_zone.primary.zone_id
+#   name    = "jenkins3.intracom.uk"
+#   type    = "A"
+#   ttl     = "300"
+#   records = [data.aws_eip.my-eip.public_ip]
+# }
 
 
 
