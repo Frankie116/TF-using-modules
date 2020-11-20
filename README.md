@@ -45,15 +45,21 @@
 
 [06] Enable the same EIP to persist even after a Terraform destroy & re-apply [Done]
 
-[07] Use Route53 to register Jenkins server dns name
+[07] Use Route53 to auto create dns record in specific Hosted Zone for Jenkins server during TF run [Done]
 
-[08] Use dns name to connect to Jenkins Server
+[08] Use dns name to connect to Jenkins Server [Done]
+
+[09] Open Server SG to allow access to Jenkins server (port 8080) [Done]
+
+[10] Manually complete Jenkins registration and start Application [Done]
 
 
 
 # -------------------
 ## Part 3 Objectives
 # -------------------
+
+[09] Use Ansible to complete Auto complete Jenkins registration and start Application
 
 [09] Build a second Jenkins server and configure them as master/slave
 
