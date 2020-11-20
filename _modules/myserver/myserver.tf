@@ -1,27 +1,31 @@
+#------------------------------
+# Project: AWS-Jenkins-Server
+# Author:  Frank Effrim-Botchey
+#------------------------------
+
 resource "aws_vpc" "my-vpc" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
-  tags = {
-    Name = "My-VPC-034"
+  tags                 = {
+    Name               = "${var.my-project-name}-VPC"
   }
 }
 
-
 resource "aws_internet_gateway" "my-gw" {
-  vpc_id = aws_vpc.my-vpc.id
-   tags = {
-    Name = "My-GW-034"
+  vpc_id  = aws_vpc.my-vpc.id
+   tags   = {
+    Name  = "${var.my-project-name}-GW"
   }
 }
 
 resource "aws_route_table" "my-route-table" {
-  vpc_id = aws_vpc.my-vpc.id
+  vpc_id        = aws_vpc.my-vpc.id
   route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.my-gw.id
+    cidr_block  = "0.0.0.0/0"
+    gateway_id  = aws_internet_gateway.my-gw.id
   }
   tags = {
-    Name = "My-RT-034"
+    Name        = "${var.my-project-name}-RT"
   }
 }
 
@@ -35,17 +39,16 @@ resource "aws_subnet" "my-subnet" {
   cidr_block        = "10.0.1.0/24"
   availability_zone = var.my-az
   tags = {
-    Name = "My-Subnet-034"
+    Name = "${var.my-project-name}-Subnet"
   }
-  # map_public_ip_on_launch = true
-  depends_on = [aws_internet_gateway.my-gw]
+  depends_on        = [aws_internet_gateway.my-gw]
 }
 
 
 resource "aws_security_group" "my-security-group" {
-  name        = "my-security-group-name"
-  description = "Allow inbound SSH, HTTP & HTTPS traffic"
-  vpc_id      = aws_vpc.my-vpc.id
+  name          = "${var.my-project-name}-Security-Group"
+  description   = "Allow inbound SSH, HTTP & HTTPS traffic"
+  vpc_id        = aws_vpc.my-vpc.id
   ingress {
     description = "HTTPS"
     from_port   = 443
@@ -67,13 +70,13 @@ resource "aws_security_group" "my-security-group" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  # ingress {
-  #   description = "Jenkins"
-  #   from_port   = 8080
-  #   to_port     = 8080
-  #   protocol    = "tcp"
-  #   cidr_blocks = ["0.0.0.0/0"]
-  # }
+  ingress {
+    description = "Jenkins"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   egress {
     from_port   = 0
     to_port     = 0
@@ -81,25 +84,24 @@ resource "aws_security_group" "my-security-group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "My-Security-Group-034"
+    Name = "${var.my-project-name}-Security-Group"
   }
 }
 
-
 resource "aws_network_interface" "my-server-nic" {
-  subnet_id   = aws_subnet.my-subnet.id
-  private_ips = ["10.0.1.50"]
+  subnet_id       = aws_subnet.my-subnet.id
+  private_ips     = ["10.0.1.50"]
   security_groups = [aws_security_group.my-security-group.id]
 
-  tags = {
-    Name = "My-Server-NIC-034"
+  tags            = {
+    Name          = "${var.my-project-name}-Server-NIC"
   }
 }
 
 data "aws_eip" "my-eip" {
   filter {
-    name   = "tag:Name"
-    values = [var.my-existing-eip]
+    name          = "tag:Name"
+    values        = [var.my-existing-eip]
   }
 }
 
@@ -110,10 +112,10 @@ resource "aws_eip_association" "eip_assoc" {
 
 
 resource "aws_instance" "my-server" {
-  ami           = data.aws_ami.my-ami.id
-  instance_type = var.my-instance-type
-  availability_zone = var.my-az
-  key_name = var.my-keypair
+  ami                    = data.aws_ami.my-ami.id
+  instance_type          = var.my-instance-type
+  availability_zone      = var.my-az
+  key_name               = "${var.my-project-name}-kp"
 
   network_interface {
     device_index         = 0
@@ -150,33 +152,33 @@ resource "aws_instance" "my-server" {
               echo "<html><body><div>Welcome to the Jenkins Server.  Hostname :$(hostname -f) </div></body></html>" > /var/www/html/index.html
               EOF
   tags          = {
-    Name        = var.my-tag-name
+    Name        = var.my-servername
     Project     = var.my-project-name
   }
 }
 
 
 data "aws_ami" "my-ami" {
-  most_recent = true
-  owners = [var.my-ami-owners]
+  most_recent   = true
+  owners        = [var.my-ami-owners]
 
   filter {
-    name   = "name"
-    values = var.my-ami-image
+    name        = "name"
+    values      = var.my-ami-image
   }
 }
 
+data "aws_route53_zone" "my-r53zone" {
+  name         = var.my-existing-r53-zone
+}
 
-# resource "aws_route53_zone" "primary" {
-#   name = "intracom.uk"
-# }
-# resource "aws_route53_record" "jenkins1" {
-#   zone_id = aws_route53_zone.primary.zone_id
-#   name    = "jenkins3.intracom.uk"
-#   type    = "A"
-#   ttl     = "300"
-#   records = [data.aws_eip.my-eip.public_ip]
-# }
+resource "aws_route53_record" "my-r53-record" {
+  zone_id     = data.aws_route53_zone.my-r53zone.zone_id
+  name        = "${var.my-servername}.${data.aws_route53_zone.my-r53zone.name}"
+  type        = "A"
+  ttl         = "300"
+  records     = [data.aws_eip.my-eip.public_ip]
+}
 
 
 

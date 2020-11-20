@@ -1,3 +1,7 @@
+#------------------------------
+# Project: AWS-Jenkins-Server
+# Author:  Frank Effrim-Botchey
+#------------------------------
 variable "region" {
     default = "eu-west-1"
 }
@@ -7,10 +11,6 @@ variable "my-az" {
 
 variable "my-instance-type" {
    default = "t2.micro"
-}
-
-variable "my-tag-name" {
-    default = "my-default-name"
 }
 
 variable "my-ami-image" {
@@ -27,10 +27,14 @@ variable "my-project-name"{
   default     = "default"
 }
 
-variable "my-keypair" {
-    default = "my-london-key"
-}
-
 variable "my-existing-eip" {
     default = "my-default-eip"
+}
+
+variable "my-existing-r53-zone" {
+    default = "intracom.uk"
+}
+
+variable "my-servername" {
+    default = "default-server"
 }
