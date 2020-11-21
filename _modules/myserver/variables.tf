@@ -22,7 +22,6 @@ variable "my-ami-owners" {
 }
 
 variable "my-project-name"{
-  description = "Name of the project. Used in resource names and tags."
   type        = string
   default     = "default"
 }
@@ -37,4 +36,12 @@ variable "my-existing-r53-zone" {
 
 variable "my-servername" {
     default = "default-server"
+}
+
+variable "my-device-name" {
+    default = "default-device-name"
+}
+
+variable "my-scriptname" {
+    default = "my-ubuntu-script.sh"
 }

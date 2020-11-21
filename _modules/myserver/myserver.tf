@@ -111,6 +111,14 @@ resource "aws_eip_association" "eip_assoc" {
 }
 
 
+data "template_file" "my-template" {
+  template      = file(var.my-scriptname)
+
+  vars          = {
+    my-scriptname = var.my-scriptname
+  }
+}
+
 resource "aws_instance" "my-server" {
   ami                    = data.aws_ami.my-ami.id
   instance_type          = var.my-instance-type
@@ -122,35 +130,8 @@ resource "aws_instance" "my-server" {
     network_interface_id = aws_network_interface.my-server-nic.id
   }
 
-  user_data = <<-EOF
-              #!/bin/bash
+  user_data = data.template_file.my-template.rendered
 
-              sudo apt update -y           
-              sudo apt install apache2 -y
-              sudo apt-get install default-jre -y
-              sudo apt-get install default-jdk
-              wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-              echo 'deb https://pkg.jenkins.io/debian-stable binary/' | sudo tee -a /etc/apt/sources.list
-              sudo apt-get update -y
-              sudo apt-get -y install jenkins
-              sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-
-
-              sudo yum update -y
-              sudo yum install httpd -y
-              sudo yum install default-jre
-              sudo yum install default-jdk
-
-
-              sudo systemctl enable httpd
-              sudo systemctl start httpd
-              sudo systemctl start apache2
-              sudo systemctl start jenkins
-
-              sudo systemctl status jenkins
-              java -version
-              echo "<html><body><div>Welcome to the Jenkins Server.  Hostname :$(hostname -f) </div></body></html>" > /var/www/html/index.html
-              EOF
   tags          = {
     Name        = var.my-servername
     Project     = var.my-project-name
@@ -182,4 +163,25 @@ resource "aws_route53_record" "my-r53-record" {
 
 
 
+
+
+
+
+
+
+
+# data "aws_ebs_snapshot" "ebs_volume" {
+#   most_recent = true
+#   owners      = ["self"]
+
+#   filter {
+#     name   = "volume-size"
+#     values = ["40"]
+#   }
+
+#   filter {
+#     name   = "tag:Name"
+#     values = ["Example"]
+#   }
+# }
 

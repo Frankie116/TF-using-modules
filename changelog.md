@@ -10,3 +10,6 @@ Servername & hosted zone is configured in terraform.tfvars
 Servers DNS record is associated to server's elastic IP
 Appended the project name to all resource tags.
 Updated the default keypair name to be "<project-name>-keypair".  therefore no need to specify in terraform.tfvars.
+
+Changelog-012
+Created a seperate script file which is called by module instead of having script coded in the module.
