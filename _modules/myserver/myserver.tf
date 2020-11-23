@@ -170,18 +170,22 @@ resource "aws_route53_record" "my-r53-record" {
 
 
 
-# data "aws_ebs_snapshot" "ebs_volume" {
-#   most_recent = true
-#   owners      = ["self"]
+data "aws_ebs_volume" "my-ebs-volume" {
+  most_recent = true
 
-#   filter {
-#     name   = "volume-size"
-#     values = ["40"]
-#   }
+  filter {
+    name   = "volume-type"
+    values = ["gp2"]
+  }
 
-#   filter {
-#     name   = "tag:Name"
-#     values = ["Example"]
-#   }
-# }
+  filter {
+    name   = "tag:Name"
+    values = ["my-jenkins-volume"]
+  }
+}
 
+resource "aws_volume_attachment" "my-ebs-attachment" {
+  device_name = "/dev/sda2"
+  volume_id   = data.aws_ebs_volume.my-ebs-volume.id
+  instance_id = aws_instance.my-server.id
+}

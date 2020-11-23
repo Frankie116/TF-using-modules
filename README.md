@@ -6,6 +6,7 @@
 # -------------------
 ## Part 1 Objectives
 # -------------------
+[00] Build/refactor code that is re-usable and streamlined
 
 [01] Create terraform modules to enable the following AWS resources to be built on a terraform run: [Done]
 
@@ -41,7 +42,8 @@
 
 [04] Save a Snapshot of the Jenkins server
 
-[05] Enable a newly built server to use a snapshot with Jenkins, java & apache installed
+[05] Enable a newly built server to use a restored snapshot with Jenkins, java & apache installed.  
+        - Any Jenkins jobs created should also be shown on the newly restored server.
 
 [06] Enable the same EIP to persist even after a Terraform destroy & re-apply [Done]
 
