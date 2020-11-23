@@ -1,5 +1,4 @@
-20/11/20
-
+BRANCH "master" 
 Changelog-010 [Objective 06]
 Module updated to use an existing EIP with tag Name = "my-default-eip"
 Module could also use an existing EIP that has the same tag as one specified in terraform.tfvars file (var.my-existing-eip = "my-other-eip")
@@ -19,6 +18,18 @@ Created a snapshot of server after the jenkins registration was completed and a 
 Created an aws volume using this snapshot.
 Reconfigured terraform module to use this snapshot when building infrastructure
     However, the newly built server can only use the snapshot as an additional drive and not the boot drive at the moment.
+
+
+
+
+BRANCH "snapshot" 
+Changelog-001 [Objective05]
+Removed code to build server from a standard amazon/ubuntu ami. (ubuntu/amazon scripts no longer used)
+Refactored code to build server from an existing customized snapshot called "my-snapshot-latest" 
+    This snapshot should be a backup of a working jenkins server including user data.
+    This snapshot needs to be found in the same region as the newly built server
+
+
     
     
     

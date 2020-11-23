@@ -3,26 +3,16 @@
 # Author:  Frank Effrim-Botchey
 #------------------------------
 
-variable "region" {
-    default = "eu-west-1"
+variable "my-region" {
+    default = "eu-west-2"
 }
 
 variable "my-az" {
-    default = "eu-west-1a"
-}
-
-variable "my-ami-image" {
-}
-
-variable "my-ami-owners" {
+    default = "eu-west-2a"
 }
 
 variable "my-project-name" {
   default     = "default"
-}
-
-variable "my-existing-eip" {
-    default = "my-default-eip"
 }
 
 variable "my-servername" {

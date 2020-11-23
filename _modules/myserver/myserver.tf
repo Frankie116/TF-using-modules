@@ -101,7 +101,7 @@ resource "aws_network_interface" "my-server-nic" {
 data "aws_eip" "my-eip" {
   filter {
     name          = "tag:Name"
-    values        = [var.my-existing-eip]
+    values        = ["my-eip-${var.my-region}"]
   }
 }
 
@@ -112,40 +112,51 @@ resource "aws_eip_association" "eip_assoc" {
 
 
 data "template_file" "my-template" {
-  template      = file(var.my-scriptname)
+  template            = file(var.my-scriptname)
 
-  vars          = {
-    my-scriptname = var.my-scriptname
+  vars                = {
+    my-scriptname     = var.my-scriptname
+  }
+}
+
+data "aws_ebs_snapshot" "my-existing-snapshot" {
+  most_recent         = true
+  owners              = ["self"]
+
+  filter {
+    name              = "tag:Name"
+    values            = ["my-snapshot-latest"]
+  }
+}
+
+
+resource "aws_ami" "my-ami" {
+  name                = "my-new-ami"
+  virtualization_type = "hvm"
+  root_device_name    = "/dev/sda1"
+
+  ebs_block_device {
+    snapshot_id       = data.aws_ebs_snapshot.my-existing-snapshot.id
+    device_name       = "/dev/sda1"
   }
 }
 
 resource "aws_instance" "my-server" {
-  ami                    = data.aws_ami.my-ami.id
-  instance_type          = var.my-instance-type
-  availability_zone      = var.my-az
-  key_name               = "${var.my-project-name}-kp"
+  ami                 = aws_ami.my-ami.id
+  instance_type       = var.my-instance-type
+  availability_zone   = var.my-az
+  key_name            = "my-kp-${var.my-region}"
+  user_data           = data.template_file.my-template.rendered
+
 
   network_interface {
-    device_index         = 0
+    device_index      = 0
     network_interface_id = aws_network_interface.my-server-nic.id
   }
-
-  user_data = data.template_file.my-template.rendered
 
   tags          = {
     Name        = var.my-servername
     Project     = var.my-project-name
-  }
-}
-
-
-data "aws_ami" "my-ami" {
-  most_recent   = true
-  owners        = [var.my-ami-owners]
-
-  filter {
-    name        = "name"
-    values      = var.my-ami-image
   }
 }
 
@@ -165,27 +176,3 @@ resource "aws_route53_record" "my-r53-record" {
 
 
 
-
-
-
-
-
-data "aws_ebs_volume" "my-ebs-volume" {
-  most_recent = true
-
-  filter {
-    name   = "volume-type"
-    values = ["gp2"]
-  }
-
-  filter {
-    name   = "tag:Name"
-    values = ["my-jenkins-volume"]
-  }
-}
-
-resource "aws_volume_attachment" "my-ebs-attachment" {
-  device_name = "/dev/sda2"
-  volume_id   = data.aws_ebs_volume.my-ebs-volume.id
-  instance_id = aws_instance.my-server.id
-}

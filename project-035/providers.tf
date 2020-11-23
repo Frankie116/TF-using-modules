@@ -3,5 +3,5 @@
 # Author:  Frank Effrim-Botchey
 #------------------------------
 provider "aws" {
-  region = var.region
+  region = var.my-region
 }
