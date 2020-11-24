@@ -3,9 +3,9 @@
 # --------------------------
 
 
-# -------------------
-## Part 1 Objectives
-# -------------------
+# --------------------------
+## Part 1 Main Objectives
+# --------------------------
 [00] Build/refactor code that is re-usable and streamlined
 
 [01] Create terraform modules to enable the following AWS resources to be built on a terraform run: [Done]
@@ -34,9 +34,9 @@
 
 
 
-# -------------------
-## Part 2 Objectives
-# -------------------
+# --------------------------
+## Part 2 Feature Objectives
+# --------------------------
 
 [03] Auto install Jenkins on the server [Done]
 
@@ -56,9 +56,9 @@
 [10] Manually complete Jenkins registration and start Application [Done]
 
 
-# -------------------
-## Part 3 Objectives
-# -------------------
+# --------------------------
+## Part 3 Feature Objectives
+# --------------------------
 
 [11] Refactor code - Use seperate Network and Server modules
 
@@ -73,9 +73,9 @@
 [16] Introduce auto scaling resources to be optionally built
 
 
-# -------------------
-## Part 4 Objectives
-# -------------------
+# --------------------------
+## Part 4 Feature Objectives
+# --------------------------
 
 [17] Build two Jenkins servers that are load balanced and in autoscaling group
 
@@ -86,22 +86,22 @@
 [20] Send email/text alerts based on Cloudwatch alarms
 
 
-# -------------------
-## Part 5 Objectives
-# -------------------
+# --------------------------
+## Part 5 Feature Objectives
+# --------------------------
 
 [21] Use Ansible to install Jenkins Application
 
 
-# -------------------
-## Part 6 Objectives
-# -------------------
+# --------------------------
+## Part 6 Feature Objectives
+# --------------------------
 
 [22] Build this project in Docker containers instead of individual aws resources
 
-# -------------------
+# --------------------------
 ## Pre Requisits
-# -------------------
+# --------------------------
 The region where the server is to built needs to have the following existing AWS resources:
         - An elastic-ip named "my-eip-<region>"
         - A key-pair name "my-kp-eu-<region>"
