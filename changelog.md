@@ -29,7 +29,7 @@ Refactored code to build server from an existing customized snapshot called "my-
     This snapshot should be a backup of a working jenkins server including user data.
     This snapshot needs to be found in the same region as the newly built server
 
-Changelog-002 [Objective05,00]
+Changelog-002 [Objective00,05,11]
 Updated the default keypair name to be "my-kp-<region>".  therefore no need to specify in terraform.tfvars.
 Updated the default eip name to be "my-eip-<servername>".  therefore no need to specify in terraform.tfvars. 
 seperated the modules into network & server.

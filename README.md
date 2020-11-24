@@ -40,10 +40,10 @@
 
 [03] Auto install Jenkins on the server [Done]
 
-[04] Save a Snapshot of the Jenkins server
+[04] Save a Snapshot of the Jenkins server [Done]
 
-[05] Enable a newly built server to use a restored snapshot with Jenkins, java & apache installed.  
-        - Any Jenkins jobs created should also be shown on the newly restored server.
+[05] Enable a newly built server to use a restored snapshot with Jenkins, java & apache installed.  [Done]
+        - Any Jenkins jobs created should also be shown on the newly restored server. [Done]
 
 [06] Enable the same EIP to persist even after a Terraform destroy & re-apply [Done]
 
@@ -56,24 +56,48 @@
 [10] Manually complete Jenkins registration and start Application [Done]
 
 
-
 # -------------------
 ## Part 3 Objectives
 # -------------------
 
-[09] Use Ansible to complete Auto complete Jenkins registration and start Application
+[11] Refactor code - Use seperate Network and Server modules
 
-[09] Build a second Jenkins server and configure them as master/slave
+[12] Enable multiple servers to be created on same network infrastructure
+
+[13] Enable servers to be built using minimum reusable code.
+
+[14] Enable Network components to be optionally built using enable variables in main code
+
+[15] Introduce load balancing resources to be optionally built
+
+[16] Introduce auto scaling resources to be optionally built
 
 
 # -------------------
 ## Part 4 Objectives
 # -------------------
 
-[10] Build this project in Docker containers instead of individual aws resources
+[17] Build two Jenkins servers that are load balanced and in autoscaling group
+
+[18] configure Jenkins application as master/slave
+
+[19] Setup Cloudwatch alarms
+
+[20] Send email/text alerts based on Cloudwatch alarms
 
 
+# -------------------
+## Part 5 Objectives
+# -------------------
 
+[21] Use Ansible to install Jenkins Application
+
+
+# -------------------
+## Part 6 Objectives
+# -------------------
+
+[22] Build this project in Docker containers instead of individual aws resources
 
 # -------------------
 ## Pre Requisits
