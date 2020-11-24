@@ -81,4 +81,4 @@
 The region where the server is to built needs to have the following existing AWS resources:
         - An elastic-ip named "my-eip-<region>"
         - A key-pair name "my-kp-eu-<region>"
-        - A snapshot of a pre-configured server/backup named "my-snapshot-<region>"
+        - A snapshot of a pre-configured server/backup named "my-snapshot-<region>" 
