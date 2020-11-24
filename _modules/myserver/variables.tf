@@ -1,12 +1,10 @@
-#------------------------------
+#-----------------------------------------------------------------
 # Project: AWS-Jenkins-Server
 # Author:  Frank Effrim-Botchey
-#------------------------------
+#-----------------------------------------------------------------
 variable "my-region" {
-    default = "eu-west-2"
 }
 variable "my-az" {
-    default = "us-west-2a"
 }
 
 variable "my-instance-type" {
@@ -14,8 +12,6 @@ variable "my-instance-type" {
 }
 
 variable "my-project-name"{
-  type        = string
-  default     = "default"
 }
 
 variable "my-existing-r53-zone" {
@@ -23,7 +19,6 @@ variable "my-existing-r53-zone" {
 }
 
 variable "my-servername" {
-    default = "default-server"
 }
 
 variable "my-scriptname" {

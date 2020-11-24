@@ -29,8 +29,30 @@ Refactored code to build server from an existing customized snapshot called "my-
     This snapshot should be a backup of a working jenkins server including user data.
     This snapshot needs to be found in the same region as the newly built server
 
-
+Changelog-002 [Objective05,00]
+Updated the default keypair name to be "my-kp-<region>".  therefore no need to specify in terraform.tfvars.
+Updated the default eip name to be "my-eip-<servername>".  therefore no need to specify in terraform.tfvars. 
+seperated the modules into network & server.
+Network module contains the following code:
+    - VPC
+    - IGW
+    - Route Table
+    - Route Table Association
+    - Subnet
+    - Route53
+Server Module contains the following code:
+    - Security Group
+    - NIC
+    - EIP
+    - EIP Association
+    - Snapshot
+    - Ami
+    - Ec2 Instance
+    - Script
     
+
+
+
     
     
     
