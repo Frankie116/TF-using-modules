@@ -32,7 +32,10 @@ Refactored code to build server from an existing customized snapshot called "my-
 Changelog-002 [Objective00,05,11]
 Updated the default keypair name to be "my-kp-<region>".  therefore no need to specify in terraform.tfvars.
 Updated the default eip name to be "my-eip-<servername>".  therefore no need to specify in terraform.tfvars. 
-seperated the modules into network & server.
+
+
+Changelog-003
+Seperated the code into network & server modules.
 Network module contains the following code: 
     - VPC
     - IGW
@@ -50,9 +53,8 @@ Server Module contains the following code:
     - Ec2 Instance
     - Script
 
-
-
-
+Changelog-004
+updated project objectives in readme.md
     
     
     
