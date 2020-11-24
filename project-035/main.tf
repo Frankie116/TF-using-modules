@@ -8,7 +8,7 @@ module "my-new-server-01" {
   my-region         = var.my-region
   my-az             = var.my-az
   my-project-name   = var.my-project-name
-  my-servername     = var.my-servername 
+  my-servername     = var.my-servername  
 }
 
 module "my-new-server-02" {

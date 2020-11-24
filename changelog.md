@@ -33,7 +33,7 @@ Changelog-002 [Objective05,00]
 Updated the default keypair name to be "my-kp-<region>".  therefore no need to specify in terraform.tfvars.
 Updated the default eip name to be "my-eip-<servername>".  therefore no need to specify in terraform.tfvars. 
 seperated the modules into network & server.
-Network module contains the following code:
+Network module contains the following code: 
     - VPC
     - IGW
     - Route Table
@@ -49,7 +49,7 @@ Server Module contains the following code:
     - Ami
     - Ec2 Instance
     - Script
-    
+
 
 
 

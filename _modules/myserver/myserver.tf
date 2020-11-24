@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------
 # Project: AWS-Jenkins-Server
 # Author:  Frank Effrim-Botchey
-#-----------------------------------------------------------------
+#----------------------------------------------------------------- 
 
 resource "aws_security_group" "my-security-group" {
   name                   = "${var.my-project-name}-Security-Group"
