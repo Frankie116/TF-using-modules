@@ -1,11 +1,15 @@
-# --------------------------
-# TF-using-modules
-# --------------------------
+--------------------------
+
+## TF-modules
+
+--------------------------
 
 
-# -------------------
-## Part 1 Objectives
-# -------------------
+-------------------
+
+Part 1 Objectives
+
+-------------------
 
 [01] Create terraform modules to enable the following AWS resources to be built on a terraform run: [Done]
 
@@ -33,9 +37,11 @@
 
 
 
-# -------------------
-## Part 2 Objectives
-# -------------------
+-------------------
+
+Part 2 Objectives
+
+-------------------
 
 [03] Auto install Jenkins on the server [Done]
 
@@ -55,18 +61,22 @@
 
 
 
-# -------------------
-## Part 3 Objectives
-# -------------------
+-------------------
+
+Part 3 Objectives
+
+-------------------
 
 [09] Use Ansible to complete Auto complete Jenkins registration and start Application
 
 [09] Build a second Jenkins server and configure them as master/slave
 
 
-# -------------------
-## Part 4 Objectives
-# -------------------
+-------------------
+
+Part 4 Objectives
+
+-------------------
 
 [10] Build this project in Docker containers instead of individual aws resources
 
